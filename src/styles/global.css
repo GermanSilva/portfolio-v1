@@ -1,6 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,300;0,400;0,700;0,800;1,100;1,300;1,400;1,700;1,800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .bg-glass {
+    @apply bg-opacity-20 backdrop-blur;
+  }
+  .bg-glass-dark {
+    @apply bg-black  bg-glass;
+  }
+  .bg-glass-light {
+    @apply bg-white bg-glass;
+  }
+  .bg-glass-border {
+    @apply border-t-[1px] border-l-[1px] border-t-zinc-300/15 border-l-zinc-300/15 border-b-[1px] border-r-[1px] border-b-zinc-900 border-r-zinc-900;
+  }
+
+  .text-glass {
+    @apply text-transparent bg-clip-text bg-opacity-15;
+    text-shadow: 1px 2px hsl(0deg 0% 0% / 15%);
+  }
+}
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

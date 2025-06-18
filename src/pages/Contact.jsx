@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { Mail, User, MessageCircle } from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from "framer-motion";
 
 const SERVICE_ID = "service_gmh90bk";
 const TEMPLATE_ID = "template_14c0kxx";
@@ -36,20 +36,13 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const token = await recaptchaRef.current.executeAsync();
-    // recaptchaRef.current.reset();
-
-    // if (!token) {
-    //   alert("No se pudo verificar reCAPTCHA");
-    //   return;
-    // }
-
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
+    // Simulación de envío sin reCAPTCHA
     setErrors({});
     setLoading(true);
 
@@ -57,9 +50,22 @@ export default function Contact() {
     setTimeout(() => {
       console.log("Simulación de envío completada");
       setSubmitted(true);
-        setLoading(false);
+      setLoading(false);
     }, 3000);
     return;
+
+    // Envío real con reCAPTCHA
+    if (!recaptchaRef.current) {
+      alert("reCAPTCHA no está disponible");
+      return;
+    }
+    const token = await recaptchaRef.current.executeAsync();
+    recaptchaRef.current.reset();
+
+    if (!token) {
+      alert("No se pudo verificar reCAPTCHA");
+      return;
+    }
 
     emailjs
       .send(SERVICE_ID, TEMPLATE_ID, formData, PUBLIC_KEY)
@@ -103,11 +109,13 @@ export default function Contact() {
             transition={{ duration: 0.3 }}
             className="space-y-4"
           >
-            <ReCAPTCHA
-              ref={recaptchaRef}
-              sitekey={RECAPTCHA_SITE_KEY}
-              size="invisible"
-            />
+            <div className="relative z-[1]">
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={RECAPTCHA_SITE_KEY}
+                size="invisible"
+              />
+            </div>
             <div className="relative">
               <User className="absolute left-3 top-3 text-gray-400" size={20} />
               <input

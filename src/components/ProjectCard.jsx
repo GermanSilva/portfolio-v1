@@ -1,16 +1,26 @@
-import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 export default function ProjectCard({ project }) {
   return (
-    <Link
-      to={`/proyectos/${project.id}`}
-      className="bg-zinc-800 rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ type: "spring", stiffness: 300 }}
+      className="bg-glass-dark bg-glass-border rounded-2xl shadow p-4 cursor-pointer h-full outline-none focus:outline-none"
     >
-      <img src={project.image} alt={project.name} className="w-full h-40 object-cover" />
-      <div className="p-4">
-        <h3 className="text-xl font-semibold">{project.name}</h3>
-        <p className="text-gray-400 text-sm mt-2">{project.description}</p>
+      <img src={project.image} alt={project.title} className="rounded mb-2" />
+      <h3 className="text-xl font-bold">{project.title}</h3>
+      <p className="text-sm text-gray-600">{project.description}</p>
+      <div className="mt-2 flex flex-wrap gap-1">
+        {project.tags.map((tag) => (
+          <span
+            key={tag}
+            className="bg-slate-800 text-blue-600 text-xs px-2 py-1 rounded"
+          >
+            {tag}
+          </span>
+        ))}
       </div>
-    </Link>
-  )
+    </motion.div>
+  );
 }
