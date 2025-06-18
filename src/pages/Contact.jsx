@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
-import { Mail, User, MessageCircle } from "lucide-react";
+import { LuUser, LuMail, LuMessageCircle } from "react-icons/lu";
 import ReCAPTCHA from "react-google-recaptcha";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -42,19 +42,9 @@ export default function Contact() {
       return;
     }
 
-    // Simulación de envío sin reCAPTCHA
     setErrors({});
     setLoading(true);
 
-    console.log("Enviando mensaje:", formData);
-    setTimeout(() => {
-      console.log("Simulación de envío completada");
-      setSubmitted(true);
-      setLoading(false);
-    }, 3000);
-    return;
-
-    // Envío real con reCAPTCHA
     if (!recaptchaRef.current) {
       alert("reCAPTCHA no está disponible");
       return;
@@ -117,7 +107,7 @@ export default function Contact() {
               />
             </div>
             <div className="relative">
-              <User className="absolute left-3 top-3 text-gray-400" size={20} />
+              <LuUser className="absolute left-3 top-3 text-gray-400" size={20} />
               <input
                 type="text"
                 name="name"
@@ -132,7 +122,7 @@ export default function Contact() {
             </div>
 
             <div className="relative">
-              <Mail className="absolute left-3 top-3 text-gray-400" size={20} />
+              <LuMail className="absolute left-3 top-3 text-gray-400" size={20} />
               <input
                 type="email"
                 name="email"
@@ -147,7 +137,7 @@ export default function Contact() {
             </div>
 
             <div className="relative">
-              <MessageCircle
+              <LuMessageCircle
                 className="absolute left-3 top-3 text-gray-400"
                 size={20}
               />
