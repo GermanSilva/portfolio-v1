@@ -10,7 +10,7 @@ export default function ProjectCard({ project }) {
     >
       <img src={project.image} alt={project.title} className="rounded mb-2" />
       <h3 className="text-xl font-bold">{project.title}</h3>
-      <p className="text-sm text-gray-600">{project.description}</p>
+      <p className="text-sm text-gray-600">{project.shortDescription}</p>
       <div className="mt-2 flex flex-wrap gap-1">
         {project.tags.map((tag) => (
           <span

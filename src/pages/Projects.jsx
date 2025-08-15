@@ -11,8 +11,8 @@ export default function Projects() {
       <h2 className="text-3xl font-bold text-center mb-8">Proyectos</h2>
 
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((p) => (
-          <div className="outline-none focus:outline-none" onClick={() => setSelectedProject(p)} tabIndex={-1}>
+        {projects.map((p, i) => (
+          <div key={i} className="outline-none focus:outline-none" onClick={() => setSelectedProject(p)} tabIndex={-1}>
             <ProjectCard project={p} />
           </div>
         ))}
